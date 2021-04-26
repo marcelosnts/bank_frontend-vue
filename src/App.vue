@@ -1,15 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <modal-factory />
+  <router-view />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import ModalFactory from './components/ModalFactory'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components: { ModalFactory },
+  setup () {
+    const router = useRouter()
+    const route = useRoute()
+
+    watch(() => route.path, async () => {
+      if (route.meta.hasAuth) {
+        const token = window.localStorage.getItem('token')
+        if (!token) {
+          router.push({ name: 'Home' })
+          return
+        }
+      }
+    })
   }
 }
 </script>
