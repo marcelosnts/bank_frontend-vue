@@ -3,10 +3,10 @@ export default httpClient => ({
     const response = await httpClient.get('/api/transactions/history')
     let errors = null
 
-    if (!response.data) {
+    if (!response) {
       errors = {
-        status: response.request.status,
-        statusText: response.request.message
+        status: 500,
+        statusText: "It was not possible to connect to the API"
       }
     }
 
