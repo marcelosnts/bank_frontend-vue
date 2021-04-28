@@ -38,16 +38,20 @@
                         {{state.balance}}
                     </div>
                 </div>
-                <div class="flex justify-center w-100 mt-10">
-                    <table class="col-12">
+                <div class="container mt-10">
+                    <table class="table-fixed">
                         <thead>
                             <tr>
-                                <th class="col-3">Operation</th>
-                                <th class="col-3">Value</th>
+                                <th class="w-1/6 w-1/2 px-4 py-2 text-light-blue-600">Operation</th>
+                                <th class="w-1/6 w-1/2 px-4 py-2 text-light-blue-600">Value</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(transaction) in state.transactions" :key="transaction.id">
+                            <tr 
+                                class="border border-light-blue-500 px-4 py-2 text-light-blue-600 font-medium bg-blue-200"
+                                v-for="(transaction) in state.transactions"
+                                :key="transaction.id"
+                            >
                                 <td class="col-3">{{transaction.type == 1 ? 'Deposit' : 'Withdraw'}}</td>
                                 <td class="col-3">{{transaction.value}}</td>
                             </tr>
@@ -61,12 +65,14 @@
 
 <script>
     import { reactive, onMounted } from 'vue'
+    import { useRouter } from 'vue-router'
     import services from '../../services'
     import useModal from '../../hooks/useModal'
 
     export default {
         setup () {
             const modal = useModal()
+            const router = useRouter()
             const state = reactive({
                 balance: 0,
                 deposits: 0,
@@ -92,9 +98,16 @@
                 })
             }
 
+            async function handleLogout() {
+                await services.auth.logout()
+                window.localStorage.removeItem('token')
+                router.push({ name: 'Home' })
+            }
+
             return {
                 state,
-                handleNewTransaction
+                handleNewTransaction,
+                handleLogout
             }
         }
     }
