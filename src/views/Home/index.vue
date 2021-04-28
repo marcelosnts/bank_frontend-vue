@@ -21,13 +21,12 @@
                     </button>
                 </div>
             </div>
-            <div class="flex flex-col mt-28 bg-brand-secondary">
+            <div class="flex flex-col mt-28 text-left">
                 <h1 class="text-4xl font-black text-white">
                     Use your account the way <br>
-                    you want to <br class="hidden lg:inline-block">
-                    use!
+                    you want to! <br class="hidden lg:inline-block">
                 </h1>
-                <p class="text-lg font-medium text-white">
+                <p class="text-lg font-medium text-white pt-4">
                     Deposit and withdraw without <br class="hidden lg:inline-block">
                     any limitation or delay
                 </p>
@@ -43,15 +42,19 @@
         </div>
     </header>
 
-    <div class="flex justify-center w-full ">
+    <div class="flex justify-center w-full bg-brand-secondary">
         <div class="flex flex-col items-center w-4/5 max-w-6xl my-16">
-            <h1 class="text-4xl font-black text-center text-gray-800">
+            <h1 class="text-4xl font-black text-center text-white">
                 Not fast enough?
             </h1>
-            <p class="text-lg text-center text-gray-800 font-regular">
+            <p class="text-lg text-center font-regular">
                 Needing a transaction right now? Your money in no time!
             </p>
         </div>
+    </div>
+    
+    <div class='flex justify-center py-2'>
+        <p class='font-medium text-center text-gray-800'>frontendbanco &#169; 2021</p>
     </div>
 </template>
 
@@ -94,3 +97,21 @@
         }
     }
 </script>
+
+<style lang="postcss" scoped>
+    .header {
+        @apply bg-brand-primary w-full flex justify-center;
+        height: 700px;
+    }
+    .header-group {
+        @apply flex flex-col w-4/5 max-w-6xl;
+    }
+    @media (min-width: 640px){
+        .header-group {
+            background-image: url(../../assets/images/home.png);
+            background-size: 512px;
+            background-position: 80% 95%;
+            background-repeat: no-repeat;
+        }
+    }
+</style>
