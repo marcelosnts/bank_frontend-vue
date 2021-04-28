@@ -1,24 +1,25 @@
-# bancofrontend
+## Frontend Bank - Vue
 
-## Project setup
+Built on: 
+- Vue 3.0
+
+# Running the project
+
+Step 1.
+
 ```
+git@github.com:marcelosnts/bank_frontend-vue.git
+
+cd .\bank_frontend-vue
+
 npm install
 ```
 
-### Compiles and hot-reloads for development
+Step 2.
+
+After that the server should be ready to run, so:
+
 ```
 npm run serve
+// http://localhost:8080
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
