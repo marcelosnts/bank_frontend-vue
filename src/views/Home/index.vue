@@ -54,7 +54,7 @@
     </div>
     
     <div class='flex justify-center py-2'>
-        <p class='font-medium text-center text-gray-800'>frontendbanco &#169; 2021</p>
+        <p class='font-medium text-center text-gray-800'><strong>frontendbanco</strong> &#169; 2021</p>
     </div>
 </template>
 
