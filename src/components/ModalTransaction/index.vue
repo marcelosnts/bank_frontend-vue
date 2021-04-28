@@ -17,7 +17,7 @@
         <label class="block">
             <span>Type</span>
             <select
-                type="email"
+                @change="onTypeChange($event)"
                 class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
             >
                 <option value="1">Deposit</option>
@@ -30,6 +30,7 @@
                 type="text"
                 class="block w-full px-4 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
                 placeholder="100.00"
+                v-model="state.value"
             >
         </label>
 
@@ -44,19 +45,47 @@
 </template>
 
 <script>
+    import { reactive } from 'vue'
+    import { useToast } from 'vue-toastification'
     import useModal from '../../hooks/useModal'
+    import services from '../../services'
     
     export default {
     setup () {
         const modal = useModal()
+        const toast = useToast()
+        const state = reactive({
+          type: 1,
+          value: 0
+        })
+
+        function onTypeChange(event) {
+          state.type = event.target.value
+        }
 
         async function handleSubmit () {
-        
+          toast.clear()
+
+          const { data } = await services.transactions.new({
+            type: state.type,
+            value: Number.toFloat(state.value, 2),
+          })
+
+          if (data.status != 200) {
+            toast.error(data.message)
+            return
+          }
+
+          toast.success(data.message)
+          state.type = 1
+          state.value = 0
         }
 
         return {
             close: modal.close,
-            handleSubmit
+            state,
+            handleSubmit,
+            onTypeChange
         }
     }
     }
