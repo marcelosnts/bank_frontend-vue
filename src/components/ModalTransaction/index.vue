@@ -46,6 +46,7 @@
 
 <script>
     import { reactive } from 'vue'
+    import { useRouter } from 'vue-router'
     import { useToast } from 'vue-toastification'
     import useModal from '../../hooks/useModal'
     import services from '../../services'
@@ -53,6 +54,7 @@
     export default {
     setup () {
         const modal = useModal()
+        const router = useRouter()
         const toast = useToast()
         const state = reactive({
           type: 1,
@@ -68,7 +70,7 @@
 
           const { data } = await services.transactions.new({
             type: state.type,
-            value: Number.toFloat(state.value, 2),
+            value: state.value,
           })
 
           if (data.status != 200) {
@@ -79,6 +81,8 @@
           toast.success(data.message)
           state.type = 1
           state.value = 0
+          modal.close()
+          router.go()
         }
 
         return {
