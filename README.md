@@ -1,9 +1,9 @@
-## Frontend Bank - Vue
+# Frontend Bank - Vue
 
 Built on: 
 - Vue 3.0
 
-# Running the project
+## Running the project
 
 Step 1.
 
